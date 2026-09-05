@@ -33,7 +33,7 @@ void* worker(void* arg) {
             Node* n = malloc(sizeof(Node));
             n->value = tid;
             Node* expected = NULL;
-            if(!atomic_compare_exchange_strong_explicit(&test_arr[s], &expected, n, memory_order_released, memory_order_relaxed)) {
+            if(!atomic_compare_exchange_strong_explicit(&test_arr[s], &expected, n, memory_order_release, memory_order_relaxed)) {
                 free(n);
             }
         }
