@@ -1,0 +1,1300 @@
+=================================================================
+==13099==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b4127f70ab0 at pc 0x0000004eacbf bp 0x7b2124bfcce0 sp 0x7b2124bfccd8
+READ of size 8 at 0x7b4127f70ab0 thread T3
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f2128bd1c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f2128c555cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b4127f70ab0 is located 0 bytes inside of 8-byte region [0x7b4127f70ab0,0x7b4127f70ab8)
+freed by thread T10 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T10 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T3 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f2128b62680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f2128b62797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f2128b62680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f2128b62797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b4127f70800: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70880: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70900: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70980: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70a00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b4127f70a80: fa fa fd fa fa fa[fd]fa fa fa fd fa fa fa fd fa
+  0x7b4127f70b00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70b80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70c00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70c80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b4127f70d00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13099==ABORTING
+exit code: 1
+=================================================================
+==13117==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b78b8663630 at pc 0x0000004eacbf bp 0x7b58ae790ce0 sp 0x7b58ae790cd8
+READ of size 8 at 0x7b78b8663630 thread T11
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f58b92c7c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f58b934b5cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b78b8663630 is located 0 bytes inside of 8-byte region [0x7b78b8663630,0x7b78b8663638)
+freed by thread T4 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T11 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T11 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f58b9258680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f58b9258797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T4 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f58b9258680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f58b9258797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b78b8663380: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b78b8663400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b78b8663480: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b78b8663500: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b78b8663580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b78b8663600: fa fa fd fa fa fa[fd]fa fa fa fa fa fa fa fa fa
+  0x7b78b8663680: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b78b8663700: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b78b8663780: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b78b8663800: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b78b8663880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13117==ABORTING
+exit code: 1
+=================================================================
+==13135==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bc6fe0b9770 at pc 0x0000004eacbf bp 0x7ba6fadfcce0 sp 0x7ba6fadfccd8
+READ of size 8 at 0x7bc6fe0b9770 thread T3
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fa6fedb3c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa6fee375cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7bc6fe0b9770 is located 0 bytes inside of 8-byte region [0x7bc6fe0b9770,0x7bc6fe0b9778)
+freed by thread T10 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T10 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T3 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fa6fed44680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa6fed44797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fa6fed44680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa6fed44797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7bc6fe0b9480: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9500: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9680: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7bc6fe0b9700: fa fa fd fa fa fa fd fa fa fa fd fa fa fa[fd]fa
+  0x7bc6fe0b9780: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9800: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9880: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9900: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6fe0b9980: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13135==ABORTING
+exit code: 1
+=================================================================
+==13153==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b81c0aed8f0 at pc 0x0000004eacbf bp 0x7b61bd7fcce0 sp 0x7b61bd7fccd8
+READ of size 8 at 0x7b81c0aed8f0 thread T3
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f61c1613c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f61c16975cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b81c0aed8f0 is located 0 bytes inside of 8-byte region [0x7b81c0aed8f0,0x7b81c0aed8f8)
+freed by thread T10 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T10 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T3 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f61c15a4680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f61c15a4797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f61c15a4680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f61c15a4797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b81c0aed600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aed680: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aed700: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aed780: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aed800: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b81c0aed880: fa fa fd fa fa fa fd fa fa fa fd fa fa fa[fd]fa
+  0x7b81c0aed900: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aed980: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aeda00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aeda80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b81c0aedb00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13153==ABORTING
+exit code: 1
+=================================================================
+==13171==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bd87d62f4d0 at pc 0x0000004eacbf bp 0x7bb878bf9ce0 sp 0x7bb878bf9cd8
+READ of size 8 at 0x7bd87d62f4d0 thread T6
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fb87e3b8c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fb87e43c5cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7bd87d62f4d0 is located 0 bytes inside of 8-byte region [0x7bd87d62f4d0,0x7bd87d62f4d8)
+freed by thread T8 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T8 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T6 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fb87e349680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fb87e349797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T8 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fb87e349680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fb87e349797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7bd87d62f200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f300: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f380: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7bd87d62f480: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fd fa
+  0x7bd87d62f500: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f680: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bd87d62f700: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13171==ABORTING
+exit code: 1
+=================================================================
+==13189==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b7e08427ff0 at pc 0x0000004eacbf bp 0x7b5df96f9ce0 sp 0x7b5df96f9cd8
+READ of size 8 at 0x7b7e08427ff0 thread T12
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f5e08cfcc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f5e08d805cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b7e08427ff0 is located 0 bytes inside of 8-byte region [0x7b7e08427ff0,0x7b7e08427ff8)
+freed by thread T10 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T10 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T12 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f5e08c8d680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f5e08c8d797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f5e08c8d680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f5e08c8d797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b7e08427d00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08427d80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08427e00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08427e80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08427f00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b7e08427f80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa[fd]fa
+  0x7b7e08428000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08428080: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08428100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08428180: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b7e08428200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13189==ABORTING
+exit code: 1
+=================================================================
+==13207==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bc6cf3e9f30 at pc 0x0000004eacbf bp 0x7ba6cc9fdce0 sp 0x7ba6cc9fdcd8
+READ of size 8 at 0x7bc6cf3e9f30 thread T2
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fa6d000dc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa6d00915cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7bc6cf3e9f30 is located 0 bytes inside of 8-byte region [0x7bc6cf3e9f30,0x7bc6cf3e9f38)
+freed by thread T4 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T2 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T2 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fa6cff9e680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa6cff9e797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T4 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fa6cff9e680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa6cff9e797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7bc6cf3e9c80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3e9d00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3e9d80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3e9e00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3e9e80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7bc6cf3e9f00: fa fa fd fa fa fa[fd]fa fa fa fa fa fa fa fa fa
+  0x7bc6cf3e9f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7bc6cf3ea000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3ea080: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3ea100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc6cf3ea180: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13207==ABORTING
+exit code: 1
+=================================================================
+==13225==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bdb64ed5fd0 at pc 0x0000004eacbf bp 0x7bbb61bfcce0 sp 0x7bbb61bfccd8
+READ of size 8 at 0x7bdb64ed5fd0 thread T3
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fbb65a6bc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fbb65aef5cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7bdb64ed5fd0 is located 0 bytes inside of 8-byte region [0x7bdb64ed5fd0,0x7bdb64ed5fd8)
+freed by thread T10 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T10 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T3 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fbb659fc680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fbb659fc797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fbb659fc680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fbb659fc797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7bdb64ed5d00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed5d80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed5e00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed5e80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed5f00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7bdb64ed5f80: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fd fa
+  0x7bdb64ed6000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed6080: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed6100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed6180: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb64ed6200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13225==ABORTING
+exit code: 1
+=================================================================
+==13243==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b20c3133810 at pc 0x0000004eacbf bp 0x7b00bf5fbce0 sp 0x7b00bf5fbcd8
+READ of size 8 at 0x7b20c3133810 thread T4
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f00c3d15c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f00c3d995cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b20c3133810 is located 0 bytes inside of 8-byte region [0x7b20c3133810,0x7b20c3133818)
+freed by thread T11 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T4 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T4 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f00c3ca6680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f00c3ca6797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T11 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f00c3ca6680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f00c3ca6797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b20c3133580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b20c3133600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b20c3133680: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b20c3133700: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b20c3133780: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b20c3133800: fa fa[fd]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b20c3133880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b20c3133900: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b20c3133980: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b20c3133a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b20c3133a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13243==ABORTING
+exit code: 1
+=================================================================
+==13261==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b8903b71330 at pc 0x0000004eacbf bp 0x7b68f8d5fce0 sp 0x7b68f8d5fcd8
+READ of size 8 at 0x7b8903b71330 thread T10
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f690463cc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f69046c05cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b8903b71330 is located 0 bytes inside of 8-byte region [0x7b8903b71330,0x7b8903b71338)
+freed by thread T12 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T12 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f69045cd680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f69045cd797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T12 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f69045cd680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f69045cd797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b8903b71080: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71180: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b8903b71300: fa fa fd fa fa fa[fd]fa fa fa fd fa fa fa fd fa
+  0x7b8903b71380: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71480: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71500: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b8903b71580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13261==ABORTING
+exit code: 1
+=================================================================
+==13279==ERROR: AddressSanitizer: heap-use-after-free on address 0x7ba303cbc4d0 at pc 0x0000004eacbf bp 0x7b82f42f7ce0 sp 0x7b82f42f7cd8
+READ of size 8 at 0x7ba303cbc4d0 thread T14
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f83048c5c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f83049495cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7ba303cbc4d0 is located 0 bytes inside of 8-byte region [0x7ba303cbc4d0,0x7ba303cbc4d8)
+freed by thread T16 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T14 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T14 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f8304856680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f8304856797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T16 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f8304856680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f8304856797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7ba303cbc200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7ba303cbc280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7ba303cbc300: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7ba303cbc380: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7ba303cbc400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7ba303cbc480: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fa fa
+  0x7ba303cbc500: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7ba303cbc580: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7ba303cbc600: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7ba303cbc680: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7ba303cbc700: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13279==ABORTING
+exit code: 1
+=================================================================
+==13297==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bdb230031f0 at pc 0x0000004eacbf bp 0x7bbb1f5fbce0 sp 0x7bbb1f5fbcd8
+READ of size 8 at 0x7bdb230031f0 thread T4
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fbb23cfac18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fbb23d7e5cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7bdb230031f0 is located 0 bytes inside of 8-byte region [0x7bdb230031f0,0x7bdb230031f8)
+freed by thread T2 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T2 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T4 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fbb23c8b680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fbb23c8b797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T2 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fbb23c8b680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fbb23c8b797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7bdb23002f00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23002f80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003080: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7bdb23003180: fa fa fd fa fa fa fd fa fa fa fd fa fa fa[fd]fa
+  0x7bdb23003200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003300: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003380: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bdb23003400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13297==ABORTING
+exit code: 1
+=================================================================
+==13314==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b89ee0cb3d0 at pc 0x0000004eacbf bp 0x7b69eadfcce0 sp 0x7b69eadfccd8
+READ of size 8 at 0x7b89ee0cb3d0 thread T3
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f69eec78c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f69eecfc5cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b89ee0cb3d0 is located 0 bytes inside of 8-byte region [0x7b89ee0cb3d0,0x7b89ee0cb3d8)
+freed by thread T12 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T12 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T3 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f69eec09680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f69eec09797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T12 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f69eec09680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f69eec09797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b89ee0cb100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb180: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb300: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b89ee0cb380: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fd fa
+  0x7b89ee0cb400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb480: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb500: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b89ee0cb600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13314==ABORTING
+exit code: 1
+=================================================================
+==13332==ERROR: AddressSanitizer: heap-use-after-free on address 0x7c12c30d8830 at pc 0x0000004eacbf bp 0x7bf2be5f9ce0 sp 0x7bf2be5f9cd8
+READ of size 8 at 0x7c12c30d8830 thread T6
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7ff2c3df0c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7ff2c3e745cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7c12c30d8830 is located 0 bytes inside of 8-byte region [0x7c12c30d8830,0x7c12c30d8838)
+freed by thread T8 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T6 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T6 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7ff2c3d81680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7ff2c3d81797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T8 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7ff2c3d81680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7ff2c3d81797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7c12c30d8580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c12c30d8600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c12c30d8680: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c12c30d8700: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c12c30d8780: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7c12c30d8800: fa fa fd fa fa fa[fd]fa fa fa fa fa fa fa fa fa
+  0x7c12c30d8880: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c12c30d8900: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c12c30d8980: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c12c30d8a00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c12c30d8a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13332==ABORTING
+exit code: 1
+=================================================================
+==13350==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b358d7cbc50 at pc 0x0000004eacbf bp 0x7b157f2face0 sp 0x7b157f2facd8
+READ of size 8 at 0x7b358d7cbc50 thread T11
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f158e0c2c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f158e1465cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b358d7cbc50 is located 0 bytes inside of 8-byte region [0x7b358d7cbc50,0x7b358d7cbc58)
+freed by thread T4 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T11 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T11 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f158e053680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f158e053797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T4 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f158e053680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f158e053797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b358d7cb980: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b358d7cba00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b358d7cba80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b358d7cbb00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b358d7cbb80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b358d7cbc00: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fa fa
+  0x7b358d7cbc80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b358d7cbd00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b358d7cbd80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b358d7cbe00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7b358d7cbe80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13350==ABORTING
+exit code: 1
+=================================================================
+==13368==ERROR: AddressSanitizer: heap-use-after-free on address 0x7c01635ed070 at pc 0x0000004eacbf bp 0x7be15dbf7ce0 sp 0x7be15dbf7cd8
+READ of size 8 at 0x7c01635ed070 thread T8
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fe164253c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe1642d75cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7c01635ed070 is located 0 bytes inside of 8-byte region [0x7c01635ed070,0x7c01635ed078)
+freed by thread T6 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T8 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T8 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fe1641e4680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe1641e4797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T6 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fe1641e4680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe1641e4797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7c01635ecd80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c01635ece00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c01635ece80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c01635ecf00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c01635ecf80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7c01635ed000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa[fd]fa
+  0x7c01635ed080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c01635ed100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c01635ed180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c01635ed200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c01635ed280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13368==ABORTING
+exit code: 1
+=================================================================
+==13381==ERROR: AddressSanitizer: heap-use-after-free on address 0x7c0219648a70 at pc 0x0000004eacbf bp 0x7be2173fece0 sp 0x7be2173fecd8
+READ of size 8 at 0x7c0219648a70 thread T1
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fe21a2d8c18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe21a35c5cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7c0219648a70 is located 0 bytes inside of 8-byte region [0x7c0219648a70,0x7c0219648a78)
+freed by thread T15 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T1 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T1 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fe21a269680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe21a269797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T15 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fe21a269680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe21a269797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7c0219648780: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0219648800: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0219648880: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0219648900: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0219648980: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7c0219648a00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa[fd]fa
+  0x7c0219648a80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0219648b00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0219648b80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0219648c00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0219648c80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13381==ABORTING
+exit code: 1
+=================================================================
+==13399==ERROR: AddressSanitizer: heap-use-after-free on address 0x7b59a7bbcbd0 at pc 0x0000004eacbf bp 0x7b399c246ce0 sp 0x7b399c246cd8
+READ of size 8 at 0x7b59a7bbcbd0 thread T10
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7f39a873fc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f39a87c35cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7b59a7bbcbd0 is located 0 bytes inside of 8-byte region [0x7b59a7bbcbd0,0x7b59a7bbcbd8)
+freed by thread T3 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T3 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f39a86d0680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f39a86d0797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T3 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7f39a86d0680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7f39a86d0797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7b59a7bbc900: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbc980: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbca00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbca80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbcb00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7b59a7bbcb80: fa fa fd fa fa fa fd fa fa fa[fd]fa fa fa fd fa
+  0x7b59a7bbcc00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbcc80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbcd00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbcd80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7b59a7bbce00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13399==ABORTING
+exit code: 1
+=================================================================
+==13417==ERROR: AddressSanitizer: heap-use-after-free on address 0x7c0273df8e90 at pc 0x0000004eacbf bp 0x7be267f5dce0 sp 0x7be267f5dcd8
+READ of size 8 at 0x7c0273df8e90 thread T12
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fe27485fc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe2748e35cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7c0273df8e90 is located 0 bytes inside of 8-byte region [0x7c0273df8e90,0x7c0273df8e98)
+freed by thread T10 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T12 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T12 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fe2747f0680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe2747f0797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T10 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fe2747f0680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fe2747f0797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7c0273df8c00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0273df8c80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0273df8d00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0273df8d80: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0273df8e00: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7c0273df8e80: fa fa[fd]fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0273df8f00: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0273df8f80: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x7c0273df9000: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0273df9080: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7c0273df9100: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13417==ABORTING
+exit code: 1
+=================================================================
+==13435==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bc073bfe4b0 at pc 0x0000004eacbf bp 0x7ba0711fdce0 sp 0x7ba0711fdcd8
+READ of size 8 at 0x7bc073bfe4b0 thread T2
+    #0 0x0000004eacbe in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34
+    #1 0x0000004a3faa in asan_thread_start(void*) asan_interceptors.cpp.o
+    #2 0x7fa07495dc18 in start_thread (/lib64/libc.so.6+0x72c18) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa0749e15cb in __GI___clone3 (/lib64/libc.so.6+0xf65cb) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+
+0x7bc073bfe4b0 is located 0 bytes inside of 8-byte region [0x7bc073bfe4b0,0x7bc073bfe4b8)
+freed by thread T4 here:
+    #0 0x0000004a64fa in free (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a64fa) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac1b in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c
+
+previously allocated by thread T4 here:
+    #0 0x0000004a6798 in malloc (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4a6798) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eac69 in worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:33:23
+
+Thread T2 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fa0748ee680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa0748ee797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+Thread T4 created by T0 here:
+    #0 0x000000489d75 in pthread_create (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x489d75) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+    #1 0x0000004eadb1 in main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:64:9
+    #2 0x7fa0748ee680 in __libc_start_call_main (/lib64/libc.so.6+0x3680) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #3 0x7fa0748ee797 in __libc_start_main@GLIBC_2.2.5 (/lib64/libc.so.6+0x3797) (BuildId: 5bd941be836f538fe5e10eff508f7f5dd94905a6)
+    #4 0x0000004006e4 in _start (/home/hardikkhandelwal/UAF-test-harness/uaf_asan+0x4006e4) (BuildId: 477fea44119752796b626b63cecfa47b6eb55ffc)
+
+SUMMARY: AddressSanitizer: heap-use-after-free /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:50:34 in worker
+Shadow bytes around the buggy address:
+  0x7bc073bfe200: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe280: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe300: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe380: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe400: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+=>0x7bc073bfe480: fa fa fd fa fa fa[fd]fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe500: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe580: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe600: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe680: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+  0x7bc073bfe700: fa fa fd fa fa fa fd fa fa fa fd fa fa fa fd fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==13435==ABORTING
+exit code: 1
