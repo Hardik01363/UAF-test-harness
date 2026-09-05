@@ -9,7 +9,10 @@
 #define NUM_THREADS 16 //my machine only supports upto 8 threads, so, not going too overboard here. but, higher no. of threads would be better for testing.
 #define ITERS_PER_THREAD 1000000
 
-//raandom number generator used by each of the threads
+typedef struct Node {long value;} Node;
+_Atomic(Node*) test_arr[ARR_SIZE]; //using _Atomic(Node*) instead of just Node* so as to tell the compiler that CAS atomic instructions would be valid for this array.\
+
+//raandom number generator used by each of the threads (rand() not thread safe)
 static unsigned int xorshift(unsigned int* state) {
     unsigned int x = *state;
     x ^= x << 13;
@@ -18,8 +21,10 @@ static unsigned int xorshift(unsigned int* state) {
     return x;
 }
 
-typedef struct Node {long value;} Node;
-_Atomic(Node*) test_arr[ARR_SIZE]; //using _Atomic(Node*) instead of just Node* so as to tell the compiler that CAS atomic instructions would be valid for this array.\
+void* worker(void* arg) {
+    long tid = (long)(size_t)arg;
+    unsigned int rng = (unsigned int)(time(NULL) ^ (tid * 2654435761u));
+}
 
 int main(void) {
     for(int i = 0; i < ARR_SIZE; i++) {
