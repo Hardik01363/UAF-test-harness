@@ -24,6 +24,34 @@ static unsigned int xorshift(unsigned int* state) {
 void* worker(void* arg) {
     long tid = (long)(size_t)arg;
     unsigned int rng = (unsigned int)(time(NULL) ^ (tid * 2654435761u));
+
+    for(long i = 0; i < ITERS_PER_THREAD; i++) {
+        int s = xorshift(&rng) % ARR_SIZE;
+        Node* cur = atomic_load_explicit(&test_arr[s], memory_order_relaxed);
+
+        if(cur == NULL) {
+            Node* n = malloc(sizeof(Node));
+            n->value = tid;
+            Node* expected = NULL;
+            if(!atomic_compare_exchange_strong_explicit(&test_arr[s], &expected, n, memory_order_released, memory_order_relaxed)) {
+                free(n);
+            }
+        }
+        else {
+            Node* expected = cur;
+            if(atomic_compare_exchange_strong_explicit(&test_arr[s], &expected, NULL, memory_order_acq_rel, memory_order_relaxed)) {
+                free(cur);
+            }
+        }
+        int s2 = xorshift(&rng) % ARR_SIZE;
+        Node* p = atomic_load_explicit(&test_arr[s2], memory_order_relaxed);
+        if(p != NULL) {
+            //race window, if node freed before next line, UAF triggered
+            volatile long v = p->value;
+            (void)v; //no use of v except referencing the node p
+        }
+    }
+    return NULL;
 }
 
 int main(void) {
@@ -31,4 +59,14 @@ int main(void) {
         atomic_init(&test_arr[i], NULL);
     }
     
+    pthread_t th[NUM_THREADS];
+    for(long i = 0; i < NUM_THREADS; i++) {
+        pthread_create(&th[i], NULL, worker, (void*)i);
+    }
+    for(long i = 0; i < NUM_THREADS; i++) {
+        pthread_join(th[i], NULL);
+    }
+
+    printf("Run completed without triggering a UAF this time\n");
+    return 0;
 }
