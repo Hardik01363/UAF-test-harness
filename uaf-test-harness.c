@@ -8,6 +8,7 @@
 #define ARR_SIZE 16 //small so as to increase thread contention
 #define NUM_THREADS 16 //my machine only supports upto 8 threads, so, not going too overboard here. but, higher no. of threads would be better for testing.
 #define ITERS_PER_THREAD 1000000
+#define INNER_ITERS 4
 
 typedef struct Node {long value;} Node;
 _Atomic(Node*) test_arr[ARR_SIZE]; //using _Atomic(Node*) instead of just Node* so as to tell the compiler that CAS atomic instructions would be valid for this array.\
@@ -27,28 +28,35 @@ void* worker(void* arg) {
 
     for(long i = 0; i < ITERS_PER_THREAD; i++) {
         int s = xorshift(&rng) % ARR_SIZE;
-        Node* cur = atomic_load_explicit(&test_arr[s], memory_order_relaxed);
+        if(s > ARR_SIZE - INNER_ITERS) {s = ARR_SIZE - INNER_ITERS;}
+        for(int i = s; i < s + INNER_ITERS; i++) {
+            Node* cur = atomic_load_explicit(&test_arr[i], memory_order_relaxed);
 
-        if(cur == NULL) {
-            Node* n = malloc(sizeof(Node));
-            n->value = tid;
-            Node* expected = NULL;
-            if(!atomic_compare_exchange_strong_explicit(&test_arr[s], &expected, n, memory_order_release, memory_order_relaxed)) {
-                free(n);
+            if(cur == NULL) {
+                Node* n = malloc(sizeof(Node));
+                n->value = tid;
+                Node* expected = NULL;
+                if(!atomic_compare_exchange_strong_explicit(&test_arr[i], &expected, n, memory_order_release, memory_order_relaxed)) {
+                    free(n);
+                }
+            }
+            else {
+                Node* expected = cur;
+                if(atomic_compare_exchange_strong_explicit(&test_arr[i], &expected, NULL, memory_order_acq_rel, memory_order_relaxed)) {
+                    free(cur);
+                }
             }
         }
-        else {
-            Node* expected = cur;
-            if(atomic_compare_exchange_strong_explicit(&test_arr[s], &expected, NULL, memory_order_acq_rel, memory_order_relaxed)) {
-                free(cur);
-            }
-        }
+
         int s2 = xorshift(&rng) % ARR_SIZE;
-        Node* p = atomic_load_explicit(&test_arr[s2], memory_order_relaxed);
-        if(p != NULL) {
-            //race window, if node freed before next line, UAF triggered
-            volatile long v = p->value;
-            (void)v; //no use of v except referencing the node p
+        if(s2 > ARR_SIZE - INNER_ITERS) {s2 = ARR_SIZE - INNER_ITERS;}
+        for(int i = s2; i < s2 + INNER_ITERS; i++) {
+            Node* p = atomic_load_explicit(&test_arr[i], memory_order_relaxed);
+            if(p != NULL) {
+                //race window, if node freed before next line, UAF triggered
+                volatile long v = p->value;
+                (void)v; //no use of v except referencing the node p
+            }
         }
     }
     return NULL;
