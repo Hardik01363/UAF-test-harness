@@ -1,0 +1,432 @@
+==================
+WARNING: ThreadSanitizer: data race (pid=15082)
+  Write of size 8 at 0x720400000800 by thread T1:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000800 by thread T2:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15084, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15085, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15088)
+  Write of size 8 at 0x7204000000c0 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x7204000000c0 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15091, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15090, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15095)
+  Read of size 8 at 0x7204000000c0 by thread T2:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x7204000000c0 by thread T1:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x7204000000c0 allocated by thread T1:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15098, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15097, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15101)
+  Read of size 8 at 0x720400001010 by thread T2:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x720400001010 by thread T3:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x720400001010 allocated by thread T3:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15104, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T3 (tid=15105, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15108)
+  Write of size 8 at 0x720400000030 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000030 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15111, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15110, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15115)
+  Read of size 8 at 0x720400000010 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x720400000010 by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x720400000010 allocated by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15117, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15118, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15121)
+  Write of size 8 at 0x7204000000b0 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x7204000000b0 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15124, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15123, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15128)
+  Write of size 8 at 0x720400000000 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000000 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15131, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15130, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15135)
+  Read of size 8 at 0x720400000820 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x720400000820 by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x720400000820 allocated by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15137, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15138, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15142)
+  Write of size 8 at 0x720400000000 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000000 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15145, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15144, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15149)
+  Write of size 8 at 0x720400000000 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000000 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15152, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15151, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15155)
+  Write of size 8 at 0x720400000000 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000000 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15158, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15157, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15161)
+  Write of size 8 at 0x720400000030 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000030 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15164, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15163, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15168)
+  Write of size 8 at 0x720400000080 by thread T1:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000080 by thread T2:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15170, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15171, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15175)
+  Read of size 8 at 0x720400000070 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x720400000070 by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15177, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15178, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15182)
+  Read of size 8 at 0x720400000800 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x720400000800 by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x720400000800 allocated by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15184, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15185, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15189)
+  Write of size 8 at 0x7204000000b0 by thread T2:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x7204000000b0 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15192, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15191, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15196)
+  Write of size 8 at 0x720400000880 by thread T1:
+    #0 free <null> (uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c (uaf_tsan+0x4bb5a7) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous read of size 8 at 0x720400000880 by thread T2:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15198, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15199, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race (/home/hardikkhandelwal/UAF-test-harness/uaf_tsan+0x43442e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d) in free
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15202)
+  Read of size 8 at 0x720400000800 by thread T1:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x720400000800 by thread T2:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x720400000800 allocated by thread T3:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15204, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15205, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T3 (tid=15206, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66
+==================
+WARNING: ThreadSanitizer: data race (pid=15209)
+  Read of size 8 at 0x7204000000a0 by thread T2:
+    #0 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 (uaf_tsan+0x4bb698) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Previous write of size 8 at 0x7204000000a0 by thread T1:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Location is heap block of size 8 at 0x7204000000a0 allocated by thread T1:
+    #0 malloc <null> (uaf_tsan+0x433904) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 worker /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:37:27 (uaf_tsan+0x4bb5f9) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T2 (tid=15212, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+  Thread T1 (tid=15211, running) created by main thread at:
+    #0 pthread_create <null> (uaf_tsan+0x435c9e) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+    #1 main /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:73:9 (uaf_tsan+0x4bb711) (BuildId: 9edbca7e6151824447f318e49ef1efaa30350f5d)
+
+SUMMARY: ThreadSanitizer: data race /home/hardikkhandelwal/UAF-test-harness/uaf-test-harness.c:58:38 in worker
+==================
+exit code: 66

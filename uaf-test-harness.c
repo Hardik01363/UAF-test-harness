@@ -19,6 +19,7 @@ static unsigned int xorshift(unsigned int* state) {
     x ^= x << 13;
     x ^= x >> 17;
     x ^= x << 5;
+    *state = x;
     return x;
 }
 
@@ -29,20 +30,20 @@ void* worker(void* arg) {
     for(long i = 0; i < ITERS_PER_THREAD; i++) {
         int s = xorshift(&rng) % ARR_SIZE;
         if(s > ARR_SIZE - INNER_ITERS) {s = ARR_SIZE - INNER_ITERS;}
-        for(int i = s; i < s + INNER_ITERS; i++) {
-            Node* cur = atomic_load_explicit(&test_arr[i], memory_order_relaxed);
+        for(int j = s; j < s + INNER_ITERS; j++) {
+            Node* cur = atomic_load_explicit(&test_arr[j], memory_order_relaxed);
 
             if(cur == NULL) {
                 Node* n = malloc(sizeof(Node));
                 n->value = tid;
                 Node* expected = NULL;
-                if(!atomic_compare_exchange_strong_explicit(&test_arr[i], &expected, n, memory_order_release, memory_order_relaxed)) {
+                if(!atomic_compare_exchange_strong_explicit(&test_arr[j], &expected, n, memory_order_release, memory_order_relaxed)) {
                     free(n);
                 }
             }
             else {
                 Node* expected = cur;
-                if(atomic_compare_exchange_strong_explicit(&test_arr[i], &expected, NULL, memory_order_acq_rel, memory_order_relaxed)) {
+                if(atomic_compare_exchange_strong_explicit(&test_arr[j], &expected, NULL, memory_order_acq_rel, memory_order_relaxed)) {
                     free(cur);
                 }
             }
@@ -50,8 +51,8 @@ void* worker(void* arg) {
 
         int s2 = xorshift(&rng) % ARR_SIZE;
         if(s2 > ARR_SIZE - INNER_ITERS) {s2 = ARR_SIZE - INNER_ITERS;}
-        for(int i = s2; i < s2 + INNER_ITERS; i++) {
-            Node* p = atomic_load_explicit(&test_arr[i], memory_order_relaxed);
+        for(int k = s2; k < s2 + INNER_ITERS; k++) {
+            Node* p = atomic_load_explicit(&test_arr[k], memory_order_relaxed);
             if(p != NULL) {
                 //race window, if node freed before next line, UAF triggered
                 volatile long v = p->value;
