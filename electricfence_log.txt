@@ -1,0 +1,100 @@
+===== RUN 1 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 2 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 3 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 4 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 5 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 6 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 7 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 8 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 9 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 10 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 11 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 12 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 13 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 14 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 15 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 16 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 17 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 18 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 19 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
+===== RUN 20 =====
+
+  Electric Fence 2.2.2 Copyright (C) 1987-1999 Bruce Perens <bruce@perens.com>
+Run completed without triggering a UAF this time
+EXIT_CODE:0
